@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_templae=self.webpackChunkreact_templae||[]).push([[521],{521:(e,t,a)=>{a.r(t),a.d(t,{default:()=>n});var c=a(294);const n=function(){return c.createElement("div",null,"center")}}}]);

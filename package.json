@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js --open"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js --open --mode=development",
+    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js --open --open --mode=production"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.14",
-    "@types/react-dom": "^17.0.9"
+    "@types/react-dom": "^17.0.9",
+    "webpack-merge": "^5.8.0"
   }
 }
