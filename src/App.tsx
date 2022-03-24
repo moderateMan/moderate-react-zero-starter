@@ -1,10 +1,11 @@
-import React from 'react'
-import Router from "./routes";
+import React from "react";
+import RouterComp from "./routes";
 
 export default () => {
-    return <div>
-        Hello
-        <Router />
+  return (
+    <div>
+      Hello
+      <RouterComp />
     </div>
-}
-
+  );
+};

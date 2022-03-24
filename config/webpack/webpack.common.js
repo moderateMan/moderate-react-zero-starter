@@ -3,6 +3,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
+const sassRegex = /\.(scss|sass)$/;
+const sassModuleRegex = /\.module\.(scss|sass)$/;
+const isEnvDevelopment = process.env.NODE_ENV==='development'
+
+
+
 module.exports = {
     entry: "./src/index.tsx",
     resolve: {
