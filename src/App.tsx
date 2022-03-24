@@ -3,7 +3,7 @@ import RouterComp from "./routes";
 
 export default () => {
   return (
-    <div>
+    <div className="content">
       Hello
       <RouterComp />
     </div>

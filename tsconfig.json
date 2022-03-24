@@ -1,25 +1,40 @@
 {
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noImplicitThis": false,
+    "experimentalDecorators":true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "downlevelIteration":true,
+    "importHelpers": true,
+    "paths": {
+      "@DATA_MANAGER/*": ["src/dataManager/*"],
+      "@STORE/*": ["src/dataManager/stores/*"],
+      "@COMMON/*":["src/common/*"],
+      "@ROUTES/*":["src/routes/*"],
+      "@SRC/*":["src/*"],
+      "@API/*":["src/dataManager/netTrans/api/*"]
+    },
+  },
   "include": [
     "src"
   ],
-  "compilerOptions": {
-    "module": "CommonJS",
-    "target": "es2018",
-    "outDir": "dist",
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "noUnusedLocals": false,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./",
-    "keyofStringsOnly": true,
-    "skipLibCheck": true,
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
-  }
+  "plugins": [{ "name": "typescript-plugin-css-modules" }]
 }
