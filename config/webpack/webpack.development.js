@@ -1,5 +1,5 @@
 const path = require("path");
-
+const proxyConfig = require('../proxy')
 
 module.exports = {
   mode: "development",
@@ -13,5 +13,6 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
     compress: true,
+    proxy:proxyConfig
   },
 };

@@ -3,8 +3,7 @@ import RouterComp from "./routes";
 
 export default () => {
   return (
-    <div className="content">
-      Hello
+    <div className="app">
       <RouterComp />
     </div>
   );

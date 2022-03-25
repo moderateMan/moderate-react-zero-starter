@@ -1,8 +1,8 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { getStyleLoaders } = require("./utils");
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+
 const isEnvDevelopment = process.env.NODE_ENV === "development";
 
 // style files regexes
@@ -22,6 +22,7 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve("src"),
+      "@COMMON": path.resolve("src/common"),
     },
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
@@ -90,7 +91,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "tpl/index.html",
     }),

@@ -112,9 +112,76 @@ module.exports = {
 
 ---
 
-# react-app-env.d这是啥？
+# react-app-env.d这是啥？global.d.ts又是啥
+react-app-env.d是cra脚手架创建了
+你搭建项目的时候，当引入scss的时候，会出现警告，提示找不到，通过在d.ts文件中declare一下就行了
+```js
+declare module '*.module.css' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
+```
+其他文件同理
+
+## 怎么用d.ts
+1. 与调用的ts文件放在同一目录下；
+2. 在声明文件tsconfig.json的include/files字段下添加声明文件的路径;
+
+强解：
+在tsconfig中include配置什么路径
+```js
+{
+  ...
+  "include": [
+    "src"
+  ],
+  ...
+}
+```
+那么d.ts放在这个路径下就没问题了。
+
+[好文](https://www.cnblogs.com/xpengp/p/12787239.html)
+
+---
+
+# css module
+
+配置webpack的方式，
+
+--- 
+
+# antd 引入
+
+样式按需引入
+
+## 1. babel
+```js
+"plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": "css"
+      }
+    ]
+  ]
+```
+
+## 2. 最简单的方式，直接引入就完了，毕竟antd自己做了按需加载了。
+直接在全局的css中引入就行了，省去了安装插件的麻烦
+
+---
+
+# webpack 中，filename 和 chunkFilename 的区别是什么？
+
+`filename`和`chunkFilename`很关键，毕竟很多插件中的参数也是沿用了这两个变量命名，比如`MiniCssExtractPlugin`。
+
+`filename` ：就是打包之后的文件名字。
+`chunkFilename`：就是懒加载的代码的名字。
+
+---
 
 
 
-  
-  
+

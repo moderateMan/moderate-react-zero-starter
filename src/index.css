@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import '~antd/dist/antd.css';
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -28,6 +29,12 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html,body {
+	height: 100%;
+}
+#root{
+	height: 100%;
+}
 body {
 	line-height: 1;
 }
@@ -48,6 +55,7 @@ table {
 }
 
 /* global */
-.content{
-	background-color: bisque;
+
+.app{
+	height: 100%;
 }
