@@ -3,12 +3,12 @@
  */
 import axios from "axios";
 import Storage from "@COMMON/storage";
-import {openNotificationWithIcon} from "@COMMON/utils";
+import { openNotificationWithIcon } from "@COMMON/utils";
 import { ACCESS_TOKEN } from "@COMMON/constants";
 
 const { NODE_ENV } = process.env;
 
-let publicPath = "";
+const publicPath = "";
 if (NODE_ENV === "development") {
   /*联调服务器地址，前提是该地址的服务支持跨域请求*/
   // publicPath = "http://*.*.*.*:*/api";
@@ -29,7 +29,7 @@ const ERR_CODE_LIST = {
 };
 class Request {
   _axiosInstance: any;
-  constructor(props?: any) {
+  constructor() {
     /* 创建axios实例，在这里可以设置请求的默认配置 */
     this._axiosInstance = axios.create({
       /* 超时10s */
@@ -48,14 +48,14 @@ class Request {
   /** 添加请求拦截器 **/
   interceptReqest() {
     this._axiosInstance.interceptors.request.use(
-      (config:any) => {
+      (config: any) => {
         config.headers["token"] = Storage.getStorage(ACCESS_TOKEN) || "";
         if (config.url.includes("pur/contract/upload")) {
           config.headers["Content-Type"] = "multipart/form-data";
         }
         return config;
       },
-      (error:any) => {
+      (error: any) => {
         // 对请求错误做些什么
         return Promise.reject(error);
       }
@@ -64,7 +64,7 @@ class Request {
   /** 添加响应拦截器  **/
   interceptResponse() {
     this._axiosInstance.interceptors.response.use(
-      (response:any) => {
+      (response: any) => {
         if (response?.data) {
           const { code = "200" } = response.data;
           /* 你是直接用code，还是用statusText是否为ok来判断，取决于与后台的约定 */
@@ -82,16 +82,16 @@ class Request {
           return Promise.reject("no data");
         }
       },
-      (error:any) => {
+      (error: any) => {
         if (error.response) {
-          const { status="" } = error.response;
+          const { status = "" } = error.response;
           /* token或者登陆失效情况下跳转到登录页面 ,因情况而定*/
           if (error.response.status === 401) {
             //   window.history.push(LOGIN)
           }
           openNotificationWithIcon(
             "error",
-            ERR_CODE_LIST[status as keyof typeof ERR_CODE_LIST] 
+            ERR_CODE_LIST[status as keyof typeof ERR_CODE_LIST]
           );
           return Promise.reject(error);
         } else {
@@ -106,16 +106,16 @@ class Request {
    * @param params  请求参数
    * @returns {Promise}
    */
-  get(url:string, params = {}) {
+  get(url: string, params = {}) {
     return new Promise((resolve, reject) => {
       this._axiosInstance
         .get(url, {
           params: params,
         })
-        .then((response:any) => {
+        .then((response: any) => {
           resolve(response.data);
         })
-        .catch((error:any) => {
+        .catch((error: any) => {
           reject(error);
         });
     });
@@ -127,7 +127,7 @@ class Request {
    * @param params
    * @returns {Promise}
    */
-  post(url:string, params = {}, config:{[key:string]:any} = {}) {
+  post(url: string, params = {}, config: { [key: string]: any } = {}) {
     return new Promise((resolve, reject) => {
       if (typeof params === "object") {
         if (params.constructor.name === "FormData") {
@@ -135,10 +135,10 @@ class Request {
         }
       }
       this._axiosInstance.post(url, params, config).then(
-        (response:any) => {
+        (response: any) => {
           resolve(response.data);
         },
-        (err:any) => {
+        (err: any) => {
           reject(err);
         }
       );
@@ -151,13 +151,13 @@ class Request {
    * @param params
    * @returns {Promise}
    */
-  patch(url:string, params = {}) {
+  patch(url: string, params = {}) {
     return new Promise((resolve, reject) => {
       this._axiosInstance.patch(url, params).then(
-        (response:any) => {
+        (response: any) => {
           resolve(response.data);
         },
-        (err:any) => {
+        (err: any) => {
           reject(err);
         }
       );
@@ -170,13 +170,13 @@ class Request {
    * @param params
    * @returns {Promise}
    */
-  put(url:string, params = {}) {
+  put(url: string, params = {}) {
     return new Promise((resolve, reject) => {
       this._axiosInstance.put(url, params).then(
-        (response:any) => {
+        (response: any) => {
           resolve(response.data);
         },
-        (err:any) => {
+        (err: any) => {
           reject(err);
         }
       );

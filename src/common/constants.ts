@@ -13,8 +13,3 @@ export const INFO = "info";
 export const WARNING = "warning";
 export const SUCCESS = "success";
 export const PAGE_SIZE = 10;
-
-
-
-
-

@@ -60,6 +60,8 @@ options: {
 
 不足，对scss和css的理解深度不够。
 
+
+
 ---
 
 # sideEffects
@@ -144,9 +146,22 @@ declare module '*.module.css' {
 
 ---
 
-# css module
+# css module 在ts中怎么添加提示
+安装`typescript-plugin-css-modules`
 
-配置webpack的方式，
+然后在tsconfig.json配置
+
+```json
+{
+  ...
+  "compilerOptions":{
+     "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  }
+  ...
+}
+
+```
+这样就可以提示，并且实现了跳转
 
 --- 
 
@@ -182,6 +197,76 @@ declare module '*.module.css' {
 
 ---
 
+# tsconfig 中的 "target": "es5"
+就是项目编译之后的代码是es5的，这样兼容性更好。
+(好文)[https://segmentfault.com/a/1190000021421461]
+
+---
+
+# 添加eslint
+安装 eslint
+新建eslint配置文件
+```js
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
+  extends: [
+    'plugin:@typescript-eslint/recommended'
+  ],
+  rules: {
+    'no-use-before-define': 'off',
+    'object-curly-spacing': ['error', 'always'],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
+    ],
+    'no-multiple-empty-lines': ['error', { 'max': 1 }],
+    'space-in-parens': ['error', 'never'],
+    'space-before-function-paren': 'off',
+    'keyword-spacing': ['error', { before: true, after: true }],
+    'function-paren-newline': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-this-alias': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_.*$',
+        varsIgnorePattern: '^_.*$'
+      }
+    ]
+  }
+}
+
+```
+然后在`package.json`中添加脚本
+```json
+ "lint": "eslint src/**/*.ts",
+```
+在webpack中添加eslint校验
+
+---
+# 移动依赖到dev中
+```js
+npm install *** -D 
+```
+
+---
+# 配置代理
 
 
 

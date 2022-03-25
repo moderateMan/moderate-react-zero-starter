@@ -5,7 +5,6 @@ import {
   } from '@ant-design/icons';
 import { INFO, WARNING, SUCCESS, EXCEPTION_INFO, DATA_MODIFY_WARNING, TIMEOUT_INFO } from '../constants'
 
-
 type MessageNoticeTypeAllT = {
     [WARNING]:"warning",
     [SUCCESS]:"success",
@@ -19,7 +18,7 @@ export const messageNotice = (type:keyof MessageNoticeTypeAllT=WARNING, content 
  * @param description
  * @param type
  */
- export const openNotificationWithIcon = (message = '', description:string = '', type = INFO) => {
+ export const openNotificationWithIcon = (message = '', description = '', type = INFO) => {
     Reflect.get(notification, type)({
         message,
         description,
@@ -27,7 +26,6 @@ export const messageNotice = (type:keyof MessageNoticeTypeAllT=WARNING, content 
         icon: <HomeOutlined type="smile" style={{ color: '#108ee9' }} />
     })
 }
-
 
 export const successByNotice = (content:string) => openNotificationWithIcon(SUCCESS, content)
 export const successByMessage = (content:string) => messageNotice(SUCCESS, content)

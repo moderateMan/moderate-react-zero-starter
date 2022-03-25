@@ -51,4 +51,5 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 
 module.exports = {
   getStyleLoaders: getStyleLoaders,
+  resolveApp:resolveApp
 };
