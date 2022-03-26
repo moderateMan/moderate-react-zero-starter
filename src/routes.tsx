@@ -1,13 +1,13 @@
-import React from "react";
-import { Navigate, useRoutes } from "react-router-dom";
-import { Login, Center, NotFund } from "./pages";
+import React from "react"
+import { Navigate, useRoutes } from "react-router-dom"
+import { Login, Center, NotFund } from "./pages"
 type CutonFallBackT =
   | boolean
   | React.ReactChild
   | React.ReactFragment
   | React.ReactPortal
-  | null;
-type ChildT = React.LazyExoticComponent<() => JSX.Element>;
+  | null
+type ChildT = React.LazyExoticComponent<() => JSX.Element>
 
 // 加载异步组件的loading
 const SuspenseWrapper = (Child: ChildT, cutonFallBack?: CutonFallBackT) => {
@@ -15,8 +15,8 @@ const SuspenseWrapper = (Child: ChildT, cutonFallBack?: CutonFallBackT) => {
     <React.Suspense fallback={cutonFallBack || <>...</>}>
       <Child />
     </React.Suspense>
-  );
-};
+  )
+}
 export default () => {
   return useRoutes([
     {
@@ -25,18 +25,18 @@ export default () => {
       children: [
         {
           path: "/center",
-          element: SuspenseWrapper(Center),
-        },
-      ],
+          element: SuspenseWrapper(Center)
+        }
+      ]
     },
     {
       path: "/",
-      element: SuspenseWrapper(Login),
+      element: SuspenseWrapper(Login)
     },
     {
       path: "/404",
-      element: SuspenseWrapper(NotFund),
+      element: SuspenseWrapper(NotFund)
     },
-    { path: "*", element: <Navigate to="/404" replace /> },
-  ]);
-};
+    { path: "*", element: <Navigate to="/404" replace /> }
+  ])
+}

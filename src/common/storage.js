@@ -5,7 +5,7 @@ class Storage {
   static store =
     process.env.NODE_ENV === "development"
       ? window.localStorage
-      : window.sessionStorage;
+      : window.sessionStorage
 
   /**
    * 获取key对应的缓存
@@ -13,8 +13,8 @@ class Storage {
    * @returns {string | null}
    */
   static getStorage(key) {
-    let val = this.store.getItem(key);
-    return this.deserialize(val);
+    let val = this.store.getItem(key)
+    return this.deserialize(val)
   }
 
   /**
@@ -24,10 +24,10 @@ class Storage {
    */
   static setStorage(key, value) {
     if (value === undefined) {
-      return this.removeStorage(key);
+      return this.removeStorage(key)
     }
-    this.store.setItem(key, this.serialize(value));
-    return value;
+    this.store.setItem(key, this.serialize(value))
+    return value
   }
 
   /**
@@ -38,11 +38,11 @@ class Storage {
     if (args.length > 0 && args.length % 2 === 0) {
       for (let i = 0, l = args.length; i < l; i++) {
         if (i % 2 === 0) {
-          this.setStorage(args[i], args[i + 1]);
+          this.setStorage(args[i], args[i + 1])
         }
       }
     } else {
-      throw new Error("要设置的缓存数据错误");
+      throw new Error("要设置的缓存数据错误")
     }
   }
 
@@ -51,7 +51,7 @@ class Storage {
    * @param key
    */
   static removeStorage(key) {
-    this.store.removeItem(key);
+    this.store.removeItem(key)
   }
 
   /**
@@ -59,14 +59,14 @@ class Storage {
    * @param keys
    */
   static removeMoreStorage(...keys) {
-    keys.map((item) => this.removeStorage(item));
+    keys.map(item => this.removeStorage(item))
   }
 
   /**
    * 移除所有缓存
    */
   static clear() {
-    this.store.clear();
+    this.store.clear()
   }
 
   /**
@@ -76,17 +76,17 @@ class Storage {
    * @returns {string}
    */
   static setValueByItem(key, value) {
-    const val = this.getStorage(key);
-    const stringVal = this.serialize(val);
-    return stringVal ? val : value;
+    const val = this.getStorage(key)
+    const stringVal = this.serialize(val)
+    return stringVal ? val : value
   }
 
   static existStorage(key) {
-    return this.store.getItem(key) !== null;
+    return this.store.getItem(key) !== null
   }
 
   //localStorage
-  static localStore = window.localStorage;
+  static localStore = window.localStorage
 
   /**
    * 获取key对应的缓存
@@ -94,8 +94,8 @@ class Storage {
    * @returns {string | null}
    */
   static getLocalStorage(key) {
-    let val = this.localStore.getItem(key);
-    return this.deserialize(val);
+    let val = this.localStore.getItem(key)
+    return this.deserialize(val)
   }
 
   /**
@@ -105,10 +105,10 @@ class Storage {
    */
   static setLocalStorage(key, value) {
     if (value === undefined) {
-      return this.removeLocalStorage(key);
+      return this.removeLocalStorage(key)
     }
-    this.localStore.setItem(key, this.serialize(value));
-    return value;
+    this.localStore.setItem(key, this.serialize(value))
+    return value
   }
 
   /**
@@ -119,11 +119,11 @@ class Storage {
     if (args.length > 0 && args.length % 2 === 0) {
       for (let i = 0, l = args.length; i < l; i++) {
         if (i % 2 === 0) {
-          this.setLocalStorage(args[i], args[i + 1]);
+          this.setLocalStorage(args[i], args[i + 1])
         }
       }
     } else {
-      throw new Error("要设置的缓存数据错误");
+      throw new Error("要设置的缓存数据错误")
     }
   }
 
@@ -132,7 +132,7 @@ class Storage {
    * @param key
    */
   static removeLocalStorage(key) {
-    this.localStore.removeItem(key);
+    this.localStore.removeItem(key)
   }
 
   /**
@@ -140,14 +140,14 @@ class Storage {
    * @param keys
    */
   static removeMoreLocalStorage(...keys) {
-    keys.map((item) => this.removeLocalStorage(item));
+    keys.map(item => this.removeLocalStorage(item))
   }
 
   /**
    * 移除所有缓存
    */
   static clearLocal() {
-    this.localStore.clear();
+    this.localStore.clear()
   }
 
   /**
@@ -157,9 +157,9 @@ class Storage {
    */
   static serialize(val) {
     if (typeof val === "string") {
-      return val;
+      return val
     }
-    return JSON.stringify(val);
+    return JSON.stringify(val)
   }
 
   /**
@@ -175,14 +175,14 @@ class Storage {
 
   static deserialize(val) {
     if (typeof val !== "string") {
-      return undefined;
+      return undefined
     }
     try {
-      return JSON.parse(val);
+      return JSON.parse(val)
     } catch (e) {
-      return val;
+      return val
     }
   }
 }
 
-export default Storage;
+export default Storage

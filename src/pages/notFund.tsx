@@ -1,5 +1,5 @@
-import React from "react";
-import { Result } from "antd";
+import React from "react"
+import { Result } from "antd"
 
 export default () => {
   return (
@@ -10,5 +10,5 @@ export default () => {
         subTitle="Sorry, you are not authorized to access this page."
       />
     </div>
-  );
-};
+  )
+}

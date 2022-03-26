@@ -1,5 +1,5 @@
-import React from "react";
-import { UploadOutlined } from "@ant-design/icons";
+import React from "react"
+import { UploadOutlined } from "@ant-design/icons"
 import {
   Form,
   Input,
@@ -9,37 +9,37 @@ import {
   Select,
   DatePicker,
   Switch,
-  InputNumber,
-} from "antd";
-const { RangePicker } = DatePicker;
-const { TextArea } = Input;
-let Option = Select.Option;
-let getSelect = (params) => {
-  const { inputConfig = {}, optionArr } = params;
+  InputNumber
+} from "antd"
+const { RangePicker } = DatePicker
+const { TextArea } = Input
+let Option = Select.Option
+let getSelect = params => {
+  const { inputConfig = {}, optionArr } = params
   const {
     style = {
-      width: "100%",
+      width: "100%"
     },
     ...rest
-  } = inputConfig;
+  } = inputConfig
   return (
     <Select style={style} {...rest}>
       {optionArr &&
         optionArr.length > 0 &&
-        optionArr.map((item) => {
+        optionArr.map(item => {
           return (
             <Option value={item[0]} key={item}>
               {item[1]}
             </Option>
-          );
+          )
         })}
     </Select>
-  );
-};
+  )
+}
 function formItemHoc(WrappedComponent) {
   return class extends React.Component {
     constructor(props) {
-      super(props);
+      super(props)
     }
 
     // proc(wrappedComponentInstance) {}
@@ -65,9 +65,9 @@ function formItemHoc(WrappedComponent) {
         // isCustomFormContent, //自定义formitem所包裹的内容
         isCustomFormItem, //彻底自定义，无需对其进行额外饿formItem包裹
         ...rest
-      } = formConfig;
+      } = formConfig
       if (type === "Select") {
-        inputConfig.style = { width: "100%", ...inputConfig.style };
+        inputConfig.style = { width: "100%", ...inputConfig.style }
       }
       let itemConfig = {
         Checkbox: <Checkbox {...inputConfig}>{label2}</Checkbox>,
@@ -81,37 +81,37 @@ function formItemHoc(WrappedComponent) {
         ),
         TextArea: <TextArea {...inputConfig} />,
         Select: () => {
-          return getSelect({ inputConfig, optionArr });
+          return getSelect({ inputConfig, optionArr })
         },
         RangePicker: <RangePicker {...inputConfig} />,
         InputNumber: <InputNumber style={{ width: "80%" }} {...inputConfig} />,
-        default: <Input {...inputConfig} />,
-      };
+        default: <Input {...inputConfig} />
+      }
 
-      let itemTemp;
+      let itemTemp
       if (render) {
         itemTemp = render({
           ...formConfig,
           getFieldDecorator,
           getFieldValue,
           setFieldsValue,
-          ...restProps,
-        });
+          ...restProps
+        })
       } else {
         if (type in itemConfig) {
           itemTemp =
             typeof itemConfig[type] === "function"
               ? itemConfig[type]()
-              : itemConfig[type];
+              : itemConfig[type]
         } else {
-          itemTemp = itemConfig["default"];
+          itemTemp = itemConfig["default"]
         }
       }
-      let formContent = itemTemp;
+      let formContent = itemTemp
       if (isCustomFormItem) {
-        return itemTemp;
+        return itemTemp
       } else {
-        formContent = itemTemp;
+        formContent = itemTemp
       }
 
       return (
@@ -124,16 +124,16 @@ function formItemHoc(WrappedComponent) {
         >
           {formContent}
         </Form.Item>
-      );
+      )
     }
 
     render() {
       const props = Object.assign({}, this.props, {
-        getFromItem: this.getFromItem,
-      });
-      return <WrappedComponent {...props} />;
+        getFromItem: this.getFromItem
+      })
+      return <WrappedComponent {...props} />
     }
-  };
+  }
 }
 
-export default formItemHoc;
+export default formItemHoc

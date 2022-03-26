@@ -1,4 +1,4 @@
-import React from "react";
-export default ()=>{
-    return <div>center</div>
+import React from "react"
+export default () => {
+  return <div>center</div>
 }

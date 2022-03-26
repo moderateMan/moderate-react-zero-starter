@@ -8,16 +8,21 @@ module.exports = {
     }
   },
   extends: [
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended'
   ],
   rules: {
     'no-use-before-define': 'off',
     'object-curly-spacing': ['error', 'always'],
     'padding-line-between-statements': [
       'error',
-      { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
+      {
+        blankLine: 'any',
+        prev: ['const', 'let', 'var'],
+        next: ['const', 'let', 'var']
+      }
     ],
-    'no-multiple-empty-lines': ['error', { 'max': 1 }],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
     'space-in-parens': ['error', 'never'],
     'space-before-function-paren': 'off',
     'keyword-spacing': ['error', { before: true, after: true }],
