@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react"
-import styles from "./index.module.scss"
-import requset from "@COMMON/reuqest"
-import { Button, Layout, Card, Form, Row } from "antd"
-import { FormItem } from "@COMMON/components"
-import toConfig from "./config"
+import React, { useEffect, useState } from 'react'
+import styles from './index.module.scss'
+import requset from '@COMMON/reuqest'
+import { Button, Layout, Card, Form, Row } from 'antd'
+import { FormItem } from '@COMMON/components'
+import toConfig from './config'
 
 interface PropsT {
   [key: string]: any
@@ -16,12 +16,12 @@ const Login: React.FC<PropsT> = () => {
   }, [])
   const fetchRegister = () => {
     requset
-      .post("/api/users/register", {
+      .post('/api/users/register', {
         username: 1,
         password: 2
       })
       .then((data: any) => {
-        alert("ok" + data)
+        alert('ok' + data)
       })
   }
   return (

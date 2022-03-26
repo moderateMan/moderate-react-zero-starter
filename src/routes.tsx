@@ -1,6 +1,6 @@
-import React from "react"
-import { Navigate, useRoutes } from "react-router-dom"
-import { Login, Center, NotFund } from "./pages"
+import React from 'react'
+import { Navigate, useRoutes } from 'react-router-dom'
+import { Login, Center, NotFund } from './pages'
 type CutonFallBackT =
   | boolean
   | React.ReactChild
@@ -20,23 +20,23 @@ const SuspenseWrapper = (Child: ChildT, cutonFallBack?: CutonFallBackT) => {
 export default () => {
   return useRoutes([
     {
-      path: "/center",
+      path: '/center',
       element: SuspenseWrapper(Center),
       children: [
         {
-          path: "/center",
+          path: '/center',
           element: SuspenseWrapper(Center)
         }
       ]
     },
     {
-      path: "/",
+      path: '/',
       element: SuspenseWrapper(Login)
     },
     {
-      path: "/404",
+      path: '/404',
       element: SuspenseWrapper(NotFund)
     },
-    { path: "*", element: <Navigate to="/404" replace /> }
+    { path: '*', element: <Navigate to="/404" replace /> }
   ])
 }

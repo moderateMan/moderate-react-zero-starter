@@ -3,7 +3,7 @@
  */
 class Storage {
   static store =
-    process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === 'development'
       ? window.localStorage
       : window.sessionStorage
 
@@ -42,7 +42,7 @@ class Storage {
         }
       }
     } else {
-      throw new Error("要设置的缓存数据错误")
+      throw new Error('要设置的缓存数据错误')
     }
   }
 
@@ -123,7 +123,7 @@ class Storage {
         }
       }
     } else {
-      throw new Error("要设置的缓存数据错误")
+      throw new Error('要设置的缓存数据错误')
     }
   }
 
@@ -156,7 +156,7 @@ class Storage {
    * @returns {string}
    */
   static serialize(val) {
-    if (typeof val === "string") {
+    if (typeof val === 'string') {
       return val
     }
     return JSON.stringify(val)
@@ -174,7 +174,7 @@ class Storage {
    */
 
   static deserialize(val) {
-    if (typeof val !== "string") {
+    if (typeof val !== 'string') {
       return undefined
     }
     try {

@@ -1,5 +1,5 @@
-import React, { Fragment } from "react"
-import formItemHoc from "@COMMON/hocs/formItemHoc"
+import React, { Fragment } from 'react'
+import formItemHoc from '@COMMON/hocs/formItemHoc'
 
 type CommonFormItemPT = {
   form: any

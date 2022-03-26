@@ -13,14 +13,14 @@ export const objectExistValue = (obj: object) => Object.keys(obj).length > 0
  * unescape() 函数可对通过 escape() 编码的字符串进行解码。
  */
 export const getUrlParam = (url: string, name: string) => {
-  const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
-  const search = url.split("?")[1]
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const search = url.split('?')[1]
   if (search) {
     const r = search.substr(0).match(reg)
     if (r !== null) return unescape(r[2])
-    return ""
+    return ''
   } else {
-    return ""
+    return ''
   }
 }
 
@@ -31,15 +31,15 @@ export function hasErrors(fieldsError: any) {
 /* 获得UUid */
 export function uuid() {
   const s: any[] = []
-  const hexDigits = "0123456789abcdef"
+  const hexDigits = '0123456789abcdef'
   for (let i = 0; i < 36; i++) {
     s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1)
   }
-  s[14] = "4"
+  s[14] = '4'
   s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1)
-  s[8] = s[13] = s[18] = s[23] = "-"
+  s[8] = s[13] = s[18] = s[23] = '-'
 
-  return s.join("")
+  return s.join('')
 }
 
 /**
@@ -49,10 +49,10 @@ export function uuid() {
 export function checkIeBrowser() {
   const userAgent = navigator.userAgent //取得浏览器的userAgent字符串
   const isIE =
-    userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 //判断是否IE<11浏览器
+    userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1 //判断是否IE<11浏览器
   // const isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
   const isIE11 =
-    userAgent.indexOf("Trident") > -1 && userAgent.indexOf("rv:11.0") > -1
+    userAgent.indexOf('Trident') > -1 && userAgent.indexOf('rv:11.0') > -1
   if (isIE || isIE11) {
     return false
   } else {
@@ -66,7 +66,7 @@ export function checkIeBrowser() {
  */
 export function formatCurrentTime() {
   const date = new Date()
-  const year = date.getFullYear() + ""
+  const year = date.getFullYear() + ''
   const month = formatTimeLength(date.getMonth() + 1)
   const day = formatTimeLength(date.getDate())
   const hour = formatTimeLength(date.getHours())
@@ -101,7 +101,7 @@ export function filterParams(obj: object) {
       const value: any = obj[key as keyof typeof obj]
       if (isEmpty(value) && !Array.isArray(value)) continue
       _newObj[key] =
-        typeof value === "object"
+        typeof value === 'object'
           ? value instanceof Array
             ? ArrayFilterParams(value)
             : filterParams(value)
@@ -117,7 +117,7 @@ export function ArrayFilterParams(arr: any) {
   arr.forEach((item: any) => {
     if (isEmpty(item)) return
     err.push(
-      typeof item === "object"
+      typeof item === 'object'
         ? item instanceof Array
           ? ArrayFilterParams(item)
           : filterParams(item)
@@ -129,6 +129,6 @@ export function ArrayFilterParams(arr: any) {
 
 /* 为空情况 */
 export function isEmpty(obj: any) {
-  const empty_arr = ["", undefined, null]
-  return empty_arr.indexOf(obj) > -1 || obj.toString().trim() === ""
+  const empty_arr = ['', undefined, null]
+  return empty_arr.indexOf(obj) > -1 || obj.toString().trim() === ''
 }

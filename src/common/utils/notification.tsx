@@ -1,6 +1,6 @@
-import React from "react"
-import { notification, message, Modal } from "antd"
-import { HomeOutlined } from "@ant-design/icons"
+import React from 'react'
+import { notification, message, Modal } from 'antd'
+import { HomeOutlined } from '@ant-design/icons'
 import {
   INFO,
   WARNING,
@@ -8,15 +8,15 @@ import {
   EXCEPTION_INFO,
   DATA_MODIFY_WARNING,
   TIMEOUT_INFO
-} from "../constants"
+} from '../constants'
 
 type MessageNoticeTypeAllT = {
-  [WARNING]: "warning"
-  [SUCCESS]: "success"
+  [WARNING]: 'warning'
+  [SUCCESS]: 'success'
 }
 export const messageNotice = (
   type: keyof MessageNoticeTypeAllT = WARNING,
-  content = ""
+  content = ''
 ) => {
   message[type](content)
 }
@@ -27,8 +27,8 @@ export const messageNotice = (
  * @param type
  */
 export const openNotificationWithIcon = (
-  message = "",
-  description = "",
+  message = '',
+  description = '',
   type = INFO
 ) => {
   Reflect.get(
@@ -38,7 +38,7 @@ export const openNotificationWithIcon = (
     message,
     description,
     duration: 6,
-    icon: <HomeOutlined type="smile" style={{ color: "#108ee9" }} />
+    icon: <HomeOutlined type="smile" style={{ color: '#108ee9' }} />
   })
 }
 
@@ -61,4 +61,4 @@ export const exceptionByNotice = () =>
 export const exceptionByMessage = () => messageNotice(WARNING, EXCEPTION_INFO)
 
 export const dataModifyWarningByModal = () =>
-  Modal.warning({ content: DATA_MODIFY_WARNING, okText: "知道了" })
+  Modal.warning({ content: DATA_MODIFY_WARNING, okText: '知道了' })

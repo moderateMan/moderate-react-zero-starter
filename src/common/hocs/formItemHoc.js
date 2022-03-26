@@ -1,5 +1,5 @@
-import React from "react"
-import { UploadOutlined } from "@ant-design/icons"
+import React from 'react'
+import { UploadOutlined } from '@ant-design/icons'
 import {
   Form,
   Input,
@@ -10,7 +10,7 @@ import {
   DatePicker,
   Switch,
   InputNumber
-} from "antd"
+} from 'antd'
 const { RangePicker } = DatePicker
 const { TextArea } = Input
 let Option = Select.Option
@@ -18,7 +18,7 @@ let getSelect = params => {
   const { inputConfig = {}, optionArr } = params
   const {
     style = {
-      width: "100%"
+      width: '100%'
     },
     ...rest
   } = inputConfig
@@ -45,7 +45,7 @@ function formItemHoc(WrappedComponent) {
     // proc(wrappedComponentInstance) {}
 
     getFromItem({
-      dataIndex = "null",
+      dataIndex = 'null',
       formConfig = {},
       getFieldDecorator = () => {},
       getFieldValue = () => {},
@@ -54,7 +54,7 @@ function formItemHoc(WrappedComponent) {
       ...restProps
     }) {
       const {
-        label = "",
+        label = '',
         label2,
         type,
         inputConfig = {},
@@ -66,8 +66,8 @@ function formItemHoc(WrappedComponent) {
         isCustomFormItem, //彻底自定义，无需对其进行额外饿formItem包裹
         ...rest
       } = formConfig
-      if (type === "Select") {
-        inputConfig.style = { width: "100%", ...inputConfig.style }
+      if (type === 'Select') {
+        inputConfig.style = { width: '100%', ...inputConfig.style }
       }
       let itemConfig = {
         Checkbox: <Checkbox {...inputConfig}>{label2}</Checkbox>,
@@ -84,7 +84,7 @@ function formItemHoc(WrappedComponent) {
           return getSelect({ inputConfig, optionArr })
         },
         RangePicker: <RangePicker {...inputConfig} />,
-        InputNumber: <InputNumber style={{ width: "80%" }} {...inputConfig} />,
+        InputNumber: <InputNumber style={{ width: '80%' }} {...inputConfig} />,
         default: <Input {...inputConfig} />
       }
 
@@ -100,11 +100,11 @@ function formItemHoc(WrappedComponent) {
       } else {
         if (type in itemConfig) {
           itemTemp =
-            typeof itemConfig[type] === "function"
+            typeof itemConfig[type] === 'function'
               ? itemConfig[type]()
               : itemConfig[type]
         } else {
-          itemTemp = itemConfig["default"]
+          itemTemp = itemConfig['default']
         }
       }
       let formContent = itemTemp
@@ -116,11 +116,11 @@ function formItemHoc(WrappedComponent) {
 
       return (
         <Form.Item
-          style={{ width: "100%", margin: 10 }}
+          style={{ width: '100%', margin: 10 }}
           {...rest}
           name={dataIndex}
           {...formLayout}
-          label={typeof label === "function" ? label() : label}
+          label={typeof label === 'function' ? label() : label}
         >
           {formContent}
         </Form.Item>

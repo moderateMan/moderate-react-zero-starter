@@ -2,9 +2,9 @@ export default () => {
   return {
     formItems: [
       {
-        dataIndex: "name",
+        dataIndex: 'name',
         formConfig: {
-          label: "姓名",
+          label: '姓名',
           rules: [
             {
               required: true,
@@ -12,27 +12,27 @@ export default () => {
             },
             {
               max: 30,
-              message: "最长为30"
+              message: '最长为30'
             },
             {
               pattern: /^[0-9a-zA-z_-]+$/,
-              message: "格式不对"
+              message: '格式不对'
             }
           ],
           inputConfig: {
-            placeholder: "请输入",
+            placeholder: '请输入',
             maxLength: 30,
-            size: "large"
+            size: 'large'
           }
         }
       },
       {
-        dataIndex: "password",
+        dataIndex: 'password',
         formConfig: {
-          label: "密码",
-          rules: [{ required: true, message: "Please input your username!" }],
+          label: '密码',
+          rules: [{ required: true, message: 'Please input your username!' }],
           inputConfig: {
-            placeholder: "请输入"
+            placeholder: '请输入'
           }
         }
       }
