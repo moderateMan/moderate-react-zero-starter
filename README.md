@@ -204,9 +204,12 @@ declare module '*.module.css' {
   ]
 ```
 
+打包大小 1.4m
+
 ## 2. 最简单的方式，直接引入就完了，毕竟 antd 自己做了按需加载了。
 
 直接在全局的 css 中引入就行了，省去了安装插件的麻烦
+但是打包大小 1.6m。。。。。
 
 ---
 
@@ -307,13 +310,16 @@ npm install *** -D
 ---
 
 # eslint prttier husky lint-staged 配置的问题
+
 ## eslint
-- 首先项目是ts的，那么安装`eslint`的方法如下
+
+- 首先项目是 ts 的，那么安装`eslint`的方法如下
   ```js
   npm i eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
   ```
 - 配置
-根目录下创建`.eslintrc`
+  根目录下创建`.eslintrc`
+
 ```json
 {
   "parser": "@typescript-eslint/parser",
@@ -330,24 +336,13 @@ npm install *** -D
   ],
   "rules": {
     "no-use-before-define": "off",
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "object-curly-spacing": ["error", "always"],
     "padding-line-between-statements": [
       "error",
       {
         "blankLine": "any",
-        "prev": [
-          "const",
-          "let",
-          "var"
-        ],
-        "next": [
-          "const",
-          "let",
-          "var"
-        ]
+        "prev": ["const", "let", "var"],
+        "next": ["const", "let", "var"]
       }
     ],
     "no-multiple-empty-lines": [
@@ -356,10 +351,7 @@ npm install *** -D
         "max": 1
       }
     ],
-    "space-in-parens": [
-      "error",
-      "never"
-    ],
+    "space-in-parens": ["error", "never"],
     "space-before-function-paren": "off",
     "keyword-spacing": [
       "error",
@@ -390,6 +382,7 @@ npm install *** -D
   }
 }
 ```
+
 ## husky
 
 > husky 是一个 `Git Hook` 工具，可以在 `git` 的周期中执行一些动作，将 `git hooks` 钩子交由`husky` 执行。
@@ -469,50 +462,58 @@ npm run prepare
 ### 周期：pre-push
 
 ## webpack 结合 eslint
+
 - 安装
-```js 
+
+```js
 yarn add eslint-webpack-plugin -D
 ```
- - 在webpack中配置
-    ```js
-      new ESLintPlugin({
-          // Plugin options
-          extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-          formatter: require.resolve('react-dev-utils/eslintFormatter'),
-          eslintPath: require.resolve('eslint'),
-          failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
-          context: resolveApp('src'),
-          cache: true,
-          cacheLocation: path.resolve(
-            resolveApp('node_modules'),
-            '.cache/.eslintcache'
-          )
-        })
-    ```
 
-## preitter 和 eslint结合
-eslint负责检验代码是否合格的
-preitter辅助格式化的
+- 在 webpack 中配置
+  ```js
+  new ESLintPlugin({
+    // Plugin options
+    extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+    formatter: require.resolve('react-dev-utils/eslintFormatter'),
+    eslintPath: require.resolve('eslint'),
+    failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+    context: resolveApp('src'),
+    cache: true,
+    cacheLocation: path.resolve(
+      resolveApp('node_modules'),
+      '.cache/.eslintcache'
+    )
+  })
+  ```
+
+## preitter 和 eslint 结合
+
+eslint 负责检验代码是否合格的
+preitter 辅助格式化的
 两结合绝配
-但是`preitter`本身也是可以配置检验规则的，所以会有可能和eslint冲突，那么就得想办法解决
+但是`preitter`本身也是可以配置检验规则的，所以会有可能和 eslint 冲突，那么就得想办法解决
 -- 安装
+
 ```js
  yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
 ```
- - 在`eslintrc`中配置
-    ```json
-      {
-        ...
-        "extends": [
-          "plugin:prettier/recommended"
-        ],
-        ...
-      }
-    ```
-    这样就会优先根据prettier来决定，很好的解决冲突的问题。
+
+- 在`eslintrc`中配置
+  ```json
+    {
+      ...
+      "extends": [
+        "plugin:prettier/recommended"
+      ],
+      ...
+    }
+  ```
+  这样就会优先根据 prettier 来决定，很好的解决冲突的问题。
 
 ### vscode 保存自动化格式化，就更美了
+
 新建`.vscode`文件夹，然后创建`settings.json`文件，然后写入以下代码
+
 ```js
 {
     "typescript.tsdk": "node_modules/typescript/lib",
@@ -536,5 +537,104 @@ preitter辅助格式化的
     "editor.formatOnSave": false
 }
 ```
+
 ---
 
+# style-loader 与 mini-css-extract-plugin
+
+## style-loader 干嘛的？
+
+> 使用多个 标签将 CSS 插入到 DOM 中，并且反应会更快
+
+## mini-css-extract-plugin 干嘛的？
+
+> 将 CSS 从你的 bundle 中分离出来，这样可以使用 CSS/JS 文件的并行加载
+
+**不要同时使用 style-loader 与 mini-css-extract-plugin。**
+开发模式用`style-loader`
+生产模式`mini-css-extract-plugin`
+
+---
+
+# webpack 的优化 optimization
+
+```js
+{
+  ...
+  optimization: {
+    // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`）
+    minimizer: [`...`, , new CssMinimizerPlugin()]
+  }
+  ...
+}
+
+```
+
+em ～～～，官方说了，你得用`...` 来表示你是在扩展，否则直接写，会覆盖这样就会丢失`terser-webpack-plugin`的作用，太恶了这个。
+
+---
+
+# CssMinimizerWebpackPlugin 和 optimize-css-assets-webpack-plugin
+
+都是优化和压缩 CSS。
+
+`CssMinimizerWebpackPlugin` 相比之下 `source maps` 和 `assets` 中使用查询字符串会更加准确，支持缓存和并发模式下运行
+
+---
+
+# souce-map
+
+sourcemap 配置的值有： [inline-|hidden-|eval-][nosources-][cheap-[module-]] [source-map]
+
+- eval：
+
+  - 使用 eval 包裹模块代码, 在尾部用拼接注释 //# sourceURL=webpack-internal:///./src/index.js，不会生成 map 文件
+
+- source-map：
+
+  - 产生.map 文件
+
+- cheap：
+
+  - 不包含列信息，也不包含 loader 的 sourcemap
+
+- module：
+
+  - 包含 loader 的 sourcemap（比如 jsx to js ，babel 的 sourcemap）
+
+- inline：
+
+  - 将.map 作为 DataURI 嵌入，不单独生成.map 文件（这个配置项比较少见）
+
+- nosources:
+
+  - 隐藏源代码，源代码的文件名
+
+- hidden:
+  - 隐藏源代码,提示编译后的文件名
+
+## 开发环境要考虑：速度快，调试友好
+
+- 速度：
+
+  - eval > inline > cheap
+
+- 调试:
+
+  - source-map > cheap-module-source-map > cheap-source-map
+
+- 推荐：
+
+  - eval-source-map/eval-cheap-module-source-map
+
+## 生产环境，要考虑： 源码要不要隐藏，调试要不要友好
+
+**inline 和 eval 会把 map 放进 js，所以生成环境不要使用行内**
+
+- 代码有隐藏要求：
+
+  - hidden-source-map / nosources-source-map
+
+- 推荐：
+
+  - nosources-cheap-source-map/hidden-cheap-source-map

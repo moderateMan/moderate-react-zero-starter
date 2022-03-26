@@ -1,17 +1,16 @@
-const path = require("path");
+const path = require('path')
 const proxyConfig = require('../proxy')
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "static/js/bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'static/js/bundle.js'
   },
-
   devServer: {
     hot: true,
     historyApiFallback: true,
     compress: true,
-    proxy:proxyConfig
-  },
-};
+    proxy: proxyConfig
+  }
+}

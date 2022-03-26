@@ -15,6 +15,7 @@ const Login: React.FC<PropsT> = () => {
     setConfig(toConfig())
   }, [])
   const fetchRegister = () => {
+    console.log('123123')
     requset
       .post('/api/users/register', {
         username: 1,

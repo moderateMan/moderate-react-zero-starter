@@ -5,11 +5,6 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { resolveApp } = require('./utils')
 
-// var
-const isEnvDevelopment = process.env.NODE_ENV === 'development'
-const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true'
-const disableESLintPlugin = true
-
 // style files regexes
 const cssRegex = /\.(css|less)$/
 const cssModuleRegex = /\.module\.(css|less)$/
@@ -17,10 +12,10 @@ const sassRegex = /\.(scss|sass)$/
 const sassModuleRegex = /\.module\.(scss|sass)$/
 
 // flags
-// Source maps are resource heavy and can cause out of memory issue for large source files.
-const isSourceMap = !isEnvDevelopment
-  ? process.env.GENERATE_SOURCEMAP !== 'false'
-  : false
+const isEnvDevelopment = process.env.NODE_ENV === 'development'
+const isSourceMap = process.env.GENERATE_SOURCEMAP === 'true'
+const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true'
+const disableESLintPlugin = process.env.ESLINT_DISABLE === 'true'
 
 module.exports = {
   entry: './src/index.tsx',
@@ -99,7 +94,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'tpl/index.html'
     }),
-    disableESLintPlugin &&
+    !disableESLintPlugin &&
       new ESLintPlugin({
         // Plugin options
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
