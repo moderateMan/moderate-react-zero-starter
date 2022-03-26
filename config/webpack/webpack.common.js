@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getStyleLoaders } = require('./utils')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const WebpackBar = require('webpackbar')
+const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader')
 const { resolveApp } = require('./utils')
 
 // style files regexes
@@ -25,6 +27,13 @@ module.exports = {
       '@COMMON': path.resolve('src/common')
     },
     extensions: ['.ts', '.tsx', '.js', '.json']
+  },
+  stats: {
+    builtAt: true,
+    colors: true,
+    timings: true,
+    warnings: false,
+    modules: false
   },
   module: {
     rules: [
@@ -91,8 +100,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new WebpackBar(),
+    new ESBuildPlugin(),
     new HtmlWebpackPlugin({
-      template: 'tpl/index.html'
+      template: 'public/tpls/index.html'
     }),
     !disableESLintPlugin &&
       new ESLintPlugin({
@@ -108,5 +119,13 @@ module.exports = {
           '.cache/.eslintcache'
         )
       })
-  ].filter(Boolean)
+  ].filter(Boolean),
+  optimization: {
+    minimizer: [
+      new ESBuildMinifyPlugin({
+        target: 'es2015',
+        minifyWhitespace: true
+      })
+    ]
+  }
 }

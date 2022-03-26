@@ -2,15 +2,20 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 
 module.exports = {
   mode: 'production',
-  devtool: 'nosources-cheap-source-map',
+  devtool: 'cheap-module-source-map',
   output: {
     path: path.resolve('dist'),
     filename: 'static/js/[name].[contenthash:8].js'
   },
+  // Stop compilation early in production
+  bail: true,
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
@@ -59,7 +64,16 @@ module.exports = {
           }
         }
       }),
-      new CssMinimizerPlugin()
+      new CssMinimizerPlugin(),
+      new CompressionPlugin({
+        algorithm: 'gzip',
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
+      }),
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false
+      })
     ]
   }
 }

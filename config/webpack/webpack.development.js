@@ -12,5 +12,8 @@ module.exports = {
     historyApiFallback: true,
     compress: true,
     proxy: proxyConfig
+  },
+  optimization: {
+    minimize: false
   }
 }
