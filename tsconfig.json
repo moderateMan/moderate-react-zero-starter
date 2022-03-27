@@ -26,7 +26,7 @@
     "importHelpers": true,
     "paths": {
       "@DATA_MANAGER/*": ["src/dataManager/*"],
-      "@STORE/*": ["src/dataManager/stores/*"],
+      "@STORE/*": ["src/store/*"],
       "@COMMON/*":["src/common/*"],
       "@ROUTES/*":["src/routes/*"],
       "@SRC/*":["src/*"],

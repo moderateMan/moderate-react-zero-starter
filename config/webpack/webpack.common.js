@@ -2,9 +2,11 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getStyleLoaders } = require('./utils')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
+
 const ESLintPlugin = require('eslint-webpack-plugin')
 const WebpackBar = require('webpackbar')
-const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader')
+const webpack = require('webpack')
+const { ESBuildMinifyPlugin, ESBuildPlugin } = require('esbuild-loader')
 const { resolveApp } = require('./utils')
 
 // style files regexes
@@ -24,25 +26,51 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve('src'),
-      '@COMMON': path.resolve('src/common')
+      '@COMMON': path.resolve('src/common'),
+      '@STORE': path.resolve('src/store')
     },
     extensions: ['.ts', '.tsx', '.js', '.json']
   },
-  stats: {
-    builtAt: true,
-    colors: true,
-    timings: true,
-    warnings: false,
-    modules: false
-  },
   module: {
     rules: [
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   use: {
+      //     loader: require.resolve('esbuild-loader'),
+      //     options: {
+      //       loader: 'jsx',
+      //       target: 'es2015',
+      //       jsxFactory: 'React.createElement',
+      //       jsxFragment: 'React.Fragment'
+      //     }
+      //   },
+      //   exclude: [/node_modules/]
+      // },
+      // {
+      //   test: /\.(ts|tsx)$/,
+      //   use: {
+      //     loader: require.resolve('esbuild-loader'),
+      //     options: {
+      //       loader: 'jsx',
+      //       target: 'es2015',
+      //       jsxFactory: 'React.createElement',
+      //       jsxFragment: 'React.Fragment'
+      //     }
+      //   },
+      //   exclude: [/node_modules/]
+      // },
       {
         test: /\.(js|jsx|ts|tsx)$/,
         use: {
           loader: require.resolve('babel-loader')
         },
         exclude: [/node_modules/]
+      },
+      isSourceMap && {
+        enforce: 'pre',
+        exclude: [/@babel(?:\/|\\{1,2})runtime/, /@antv/, /inversify/],
+        test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+        loader: require.resolve('source-map-loader')
       },
       {
         test: cssRegex,
@@ -100,8 +128,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new WebpackBar(),
     new ESBuildPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      React: 'react'
+    }),
+    new WebpackBar(),
     new HtmlWebpackPlugin({
       template: 'public/tpls/index.html'
     }),
@@ -111,7 +143,8 @@ module.exports = {
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
         formatter: require.resolve('react-dev-utils/eslintFormatter'),
         eslintPath: require.resolve('eslint'),
-        failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+        emitError: emitErrorsAsWarnings,
+        failOnError: emitErrorsAsWarnings,
         context: resolveApp('src'),
         cache: true,
         cacheLocation: path.resolve(
@@ -124,7 +157,8 @@ module.exports = {
     minimizer: [
       new ESBuildMinifyPlugin({
         target: 'es2015',
-        minifyWhitespace: true
+        minifyWhitespace: true,
+        css: true
       })
     ]
   }

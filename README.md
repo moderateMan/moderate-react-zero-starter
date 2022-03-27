@@ -638,3 +638,96 @@ sourcemap 配置的值有： [inline-|hidden-|eval-][nosources-][cheap-[module-]
 - 推荐：
 
   - nosources-cheap-source-map/hidden-cheap-source-map
+
+---
+
+# sessionStorage 和 localStorage 的共享情况
+
+1. 不同浏览器无法共享 localStorage 和 sessionStorage 的值
+2. 相同浏览器下，并且是同源窗口（协议、域名、端口一致），不同页面可以共享 localStorage 值，通过跳转的页面可以共享 sessionStorage 值
+3. 关于 sessionStorage，通常说 sessionStorage 关闭页面即消失，但是通过跳转的页面可以共享 sessionStorage 值，跳转有多种方式：
+
+   - (1) <a href="同源页面" target="_self">跳转</a> //原窗口
+   - (2) <a href="同源页面" target="_blank">跳转</a> //新开窗口
+   - (3) window.location.href = '同源页面' //原窗口
+   - (4) window.location.replace('同源页面') //原窗口
+   - (5) window.open('同源页面') //新开窗口
+   - (6) this.$router.push({path: '同源页面'}) //通过路由跳转共享值
+     **原窗口跳转的页面传递 sessionStorage，改变存储值会相互影响，新开窗口跳转方式传递 sessionStorage，改变存储值互不影响。**
+
+app 端经过原生方法更换 webView 实现跳转，这种方式不能共享 sessionStorage。
+
+---
+
+# 这里抛出 DevTools failed to load SourceMap 警告的原因是：
+
+- 修改浏览器配置
+
+  - 项目引用的第三方的 JavaScript 工具是压缩后的版本，
+    存在 SourceMap 的指向信息，
+    浏览器启用了 JavaScript 源映射，
+    但是我的项目中没有相应的 SourceMap 文件，所以抛出此异常。
+
+    - 设置浏览器：
+      在设置面板中 Preferences -> Sources -> Enable JavaScript source maps
+      勾选掉 【Enable JavaScript source maps】选项，即可
+
+      **不推荐，没意义**
+
+# 使用 source-map-loader
+
+- 安装
+
+```
+yarn add  source-map-loader
+```
+
+- `webpack`中配置`loader`中配置
+  ```js
+      {
+        enforce: 'pre',
+        exclude: [/@babel(?:\/|\\{1,2})runtime/, /@antv/, /inversify/],
+        test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+        loader: require.resolve('source-map-loader')
+      }
+  ```
+
+---
+
+# 每个 tsx&jsx 文件头部都得引入 react 嫌烦？
+
+使用 webpack 自带的插件
+
+```js
+new webpack.ProvidePlugin({
+      React: 'react'
+    }),
+```
+
+---
+
+# Uncaught ReferenceError: regeneratorRuntime is not defined
+
+- 在程序中使用了 async/await ，经过@babel/preset-env 解析后会将代码转换为一个名为 regeneratorRuntime 的函数，但是转换后的代码仅仅存在这个函数的调用，并没有具体的定义体现。
+- 安装@babel/plugin-transform-runtime 插件
+  ```js
+   yarn add @babel/plugin-transform-runtime
+  ```
+  - 在 babel 配置文件中配置插件
+    ```js
+    {
+      ...
+      plugins:[
+        ...
+        "@babel/plugin-transform-runtime"
+        ...
+      ]
+      ...
+    }
+    ```
+
+---
+
+# 怎么优化 webpack 输出
+
+- 安装 `friendly-errors-webpack-plugin`就能保持输出清晰了。

@@ -18,6 +18,7 @@
         "libraryDirectory": "es",
         "style": "css"
       }
-    ]
+    ],
+    "@babel/plugin-transform-runtime"
   ]
 }
