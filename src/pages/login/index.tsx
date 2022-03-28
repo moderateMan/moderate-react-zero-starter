@@ -13,18 +13,21 @@ interface PropsT {
 const Login: React.FC<PropsT> = () => {
   const navigate = useNavigate()
   const [config, setConfig] = useState<any>({})
+  const [isLogin, setIsLogin] = useState<boolean>(false)
   useEffect(() => {
     setConfig(toConfig())
   }, [])
   const fetchRegister = () => {
-    console.log('123123')
     requset
       .post('/api/users/register', {
         username: 1,
         password: 2
       })
-      .then((data: any) => {
-        alert('ok' + data)
+      .then(() => {
+        setIsLogin(true)
+      })
+      .catch(() => {
+        setIsLogin(false)
       })
   }
   return (
@@ -35,6 +38,9 @@ const Login: React.FC<PropsT> = () => {
             return <FormItem {...item} key={index}></FormItem>
           })}
         </Form>
+        <div role={isLogin ? 'infoOk' : 'infoNologin'}>
+          {isLogin ? '登陆成功' : '未登陆'}
+        </div>
         <Row style={{ marginTop: 20 }} justify="center">
           <Button
             style={{ marginRight: 20 }}
@@ -45,6 +51,7 @@ const Login: React.FC<PropsT> = () => {
             登陆
           </Button>
           <Button
+            role="register"
             onClick={() => {
               fetchRegister()
             }}

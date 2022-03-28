@@ -50,7 +50,9 @@ module.exports = {
             // https://github.com/facebook/create-react-app/issues/5250
             // Pending further investigation:
             // https://github.com/terser-js/terser/issues/120
-            inline: 2
+            inline: 2,
+            drop_console: true,
+            drop_debugger: true
           },
           mangle: {
             safari10: true

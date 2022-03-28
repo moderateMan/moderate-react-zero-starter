@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Login page renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <section
+        class="ant-layout layout"
+      >
+        <div
+          class="ant-card ant-card-bordered login_table"
+        >
+          <div
+            class="ant-card-body"
+          >
+            <form
+              class="ant-form ant-form-horizontal"
+            >
+              <div
+                class="ant-row ant-form-item"
+                style="width: 100%; margin: 10px;"
+              >
+                <div
+                  class="ant-col ant-form-item-label"
+                >
+                  <label
+                    class="ant-form-item-required"
+                    for="name"
+                    title="姓名"
+                  >
+                    姓名
+                  </label>
+                </div>
+                <div
+                  class="ant-col ant-form-item-control"
+                >
+                  <div
+                    class="ant-form-item-control-input"
+                  >
+                    <div
+                      class="ant-form-item-control-input-content"
+                    >
+                      <input
+                        class="ant-input ant-input-lg"
+                        id="name"
+                        maxlength="30"
+                        placeholder="请输入"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-row ant-form-item"
+                style="width: 100%; margin: 10px;"
+              >
+                <div
+                  class="ant-col ant-form-item-label"
+                >
+                  <label
+                    class="ant-form-item-required"
+                    for="password"
+                    title="密码"
+                  >
+                    密码
+                  </label>
+                </div>
+                <div
+                  class="ant-col ant-form-item-control"
+                >
+                  <div
+                    class="ant-form-item-control-input"
+                  >
+                    <div
+                      class="ant-form-item-control-input-content"
+                    >
+                      <input
+                        class="ant-input"
+                        id="password"
+                        placeholder="请输入"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div
+              role="infoNologin"
+            >
+              未登陆
+            </div>
+            <div
+              class="ant-row ant-row-center"
+              style="margin-top: 20px;"
+            >
+              <button
+                class="ant-btn ant-btn-default"
+                style="margin-right: 20px;"
+                type="button"
+              >
+                <span>
+                  登 陆
+                </span>
+              </button>
+              <button
+                class="ant-btn ant-btn-default"
+                role="register"
+                type="button"
+              >
+                <span>
+                  注 册
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>,
+  "container": <div>
+    <section
+      class="ant-layout layout"
+    >
+      <div
+        class="ant-card ant-card-bordered login_table"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <form
+            class="ant-form ant-form-horizontal"
+          >
+            <div
+              class="ant-row ant-form-item"
+              style="width: 100%; margin: 10px;"
+            >
+              <div
+                class="ant-col ant-form-item-label"
+              >
+                <label
+                  class="ant-form-item-required"
+                  for="name"
+                  title="姓名"
+                >
+                  姓名
+                </label>
+              </div>
+              <div
+                class="ant-col ant-form-item-control"
+              >
+                <div
+                  class="ant-form-item-control-input"
+                >
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input ant-input-lg"
+                      id="name"
+                      maxlength="30"
+                      placeholder="请输入"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-row ant-form-item"
+              style="width: 100%; margin: 10px;"
+            >
+              <div
+                class="ant-col ant-form-item-label"
+              >
+                <label
+                  class="ant-form-item-required"
+                  for="password"
+                  title="密码"
+                >
+                  密码
+                </label>
+              </div>
+              <div
+                class="ant-col ant-form-item-control"
+              >
+                <div
+                  class="ant-form-item-control-input"
+                >
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="password"
+                      placeholder="请输入"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div
+            role="infoNologin"
+          >
+            未登陆
+          </div>
+          <div
+            class="ant-row ant-row-center"
+            style="margin-top: 20px;"
+          >
+            <button
+              class="ant-btn ant-btn-default"
+              style="margin-right: 20px;"
+              type="button"
+            >
+              <span>
+                登 陆
+              </span>
+            </button>
+            <button
+              class="ant-btn ant-btn-default"
+              role="register"
+              type="button"
+            >
+              <span>
+                注 册
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

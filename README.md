@@ -731,3 +731,35 @@ new webpack.ProvidePlugin({
 # 怎么优化 webpack 输出
 
 - 安装 `friendly-errors-webpack-plugin`就能保持输出清晰了。
+
+---
+
+# 去掉打包后 debugger 和 concole
+
+```js
+minimizer: [
+  ...
+  new TerserPlugin({
+    ...
+    terserOptions: {
+      ...
+      compress: {
+        ...
+        drop_console: true,
+        drop_debugger: true
+        ...
+      }
+      ...
+    }
+    ...
+  })
+  ...
+]
+```
+
+---
+
+# 单元测试
+
+安装 jest
+安装 jest
