@@ -21,8 +21,7 @@
     "buildAll": "cross-env BUNDLE_NO_ANALZER=true yarn build && npm-run-all --parallel buildQ:*",
     "buildQ:sub-react": "cd subApps/sub-react && npm run build && mkdir -p ../../build/subapp/sub-react && cp -r ./build/* ../../build/subapp/sub-react/",
     "buildQ:sub-vue": "cd subApps/sub-vue && npm run build && mkdir -p ../../build/subapp/sub-vue && cp -r ./dist/* ../../build/subapp/sub-vue/",
-    "installAll": "npm-run-all --serial installQ:*",
-    "installQ:main": "yarn",
+    "installAll": "yarn && npm-run-all --serial installQ:*",
     "installQ:sub-vue": "cd subApps/sub-vue && yarn",
     "installQ:sub-react": "cd subApps/sub-react && yarn"
   },
