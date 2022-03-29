@@ -7,7 +7,7 @@ name: deploy for qiankun
 on:
   push:
     branches:
-      - 'qiankun' # 只针对 dev 分支
+      - 'master' # 只针对 dev 分支
     paths:
       - '.github/workflows/*'
       - 'src/**'
