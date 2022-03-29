@@ -1,11 +1,11 @@
-const path = require('path')
-const proxyConfig = require('../proxy')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const proxyConfig = require('../proxy')
+const paths = require('../utils/paths')
 
 module.exports = {
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: paths.appBuild,
     filename: 'static/js/bundle.js'
   },
   devtool: 'source-map',

@@ -1,13 +1,13 @@
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getStyleLoaders } = require('./utils')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
-
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const webpack = require('webpack')
 const { ESBuildMinifyPlugin, ESBuildPlugin } = require('esbuild-loader')
-const { resolveApp } = require('./utils')
+const { getClientEnvironment } = require('../env')
+const paths = require('../utils/paths')
 
 // style files regexes
 const cssRegex = /\.(css|less)$/
@@ -16,18 +16,20 @@ const sassRegex = /\.(scss|sass)$/
 const sassModuleRegex = /\.module\.(scss|sass)$/
 
 // flags
-const isEnvDevelopment = process.env.NODE_ENV === 'development'
 const isSourceMap = process.env.GENERATE_SOURCEMAP === 'true'
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true'
 const disableESLintPlugin = process.env.ESLINT_DISABLE === 'true'
+const isEnvDevelopment = process.env.NODE_ENV === 'development'
+const shouldUseReactRefresh = process.env.shouldUseReactRefresh === 'true'
 
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1))
 module.exports = {
   entry: './src/index.tsx',
   resolve: {
     alias: {
-      '@': path.resolve('src'),
-      '@COMMON': path.resolve('src/common'),
-      '@STORE': path.resolve('src/store')
+      '@': paths.appSrc,
+      '@COMMON': paths.appCommon,
+      '@STORE': paths.appStore
     },
     extensions: ['.ts', '.tsx', '.js', '.json']
   },
@@ -128,29 +130,58 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin(env.stringified),
     new ESBuildPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    isEnvDevelopment &&
+      shouldUseReactRefresh &&
+      new ReactRefreshWebpackPlugin({
+        overlay: {
+          entry: paths.webpackDevClientEntry,
+          module: paths.reactRefreshOverlayEntry,
+          sockIntegration: false
+        }
+      }),
     new webpack.ProvidePlugin({
       React: 'react'
     }),
     new WebpackBar(),
-    new HtmlWebpackPlugin({
-      template: 'public/tpls/index.html'
-    }),
+    new HtmlWebpackPlugin(
+      Object.assign(
+        {},
+        {
+          inject: true,
+          template: paths.appHtml
+        },
+        !isEnvDevelopment
+          ? {
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+              }
+            }
+          : undefined
+      )
+    ),
     !disableESLintPlugin &&
       new ESLintPlugin({
         // Plugin options
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-        formatter: require.resolve('react-dev-utils/eslintFormatter'),
-        eslintPath: require.resolve('eslint'),
+        formatter: paths.eslintFormatter,
+        eslintPath: paths.eslintPath,
         emitError: emitErrorsAsWarnings,
         failOnError: emitErrorsAsWarnings,
-        context: resolveApp('src'),
+        context: paths.appSrc,
         cache: true,
-        cacheLocation: path.resolve(
-          resolveApp('node_modules'),
-          '.cache/.eslintcache'
-        )
+        cacheLocation: paths.eslintPluginCache
       })
   ].filter(Boolean),
   optimization: {

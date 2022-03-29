@@ -5,19 +5,20 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const path = require('path')
+const paths = require('../utils/paths')
+const CleanPlugin = require('./plugins/cleanPlugin')
 
 module.exports = {
   mode: 'production',
   devtool: 'cheap-module-source-map',
   output: {
-    path: path.resolve('dist'),
+    path: paths.appBuild,
     filename: 'static/js/[name].[contenthash:8].js'
   },
   // Stop compilation early in production
   bail: true,
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanPlugin(),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
@@ -73,9 +74,10 @@ module.exports = {
         threshold: 10240,
         minRatio: 0.8
       }),
-      new BundleAnalyzerPlugin({
-        openAnalyzer: false
-      })
-    ]
+      !process.env.BUNDLE_NO_ANALZER &&
+        new BundleAnalyzerPlugin({
+          openAnalyzer: false
+        })
+    ].filter(Boolean)
   }
 }

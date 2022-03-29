@@ -1,5 +1,5 @@
 //load env var
-require('./env.config')
+require('./env.js')
 const {
   developmentConfig,
   productionConfig,

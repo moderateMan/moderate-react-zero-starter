@@ -45,7 +45,7 @@ const Login: React.FC<PropsT> = () => {
           <Button
             style={{ marginRight: 20 }}
             onClick={() => {
-              navigate('/center')
+              navigate('/subReact')
             }}
           >
             登陆

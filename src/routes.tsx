@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
-import { Login, Center, NotFund } from './pages'
+import { Login, Center, NotFund, SubVue, SubReact } from './pages'
 type CutonFallBackT =
   | boolean
   | React.ReactChild
@@ -21,13 +21,15 @@ export default () => {
   return useRoutes([
     {
       path: '/center',
-      element: SuspenseWrapper(Center),
-      children: [
-        {
-          path: '/center',
-          element: SuspenseWrapper(Center)
-        }
-      ]
+      element: SuspenseWrapper(Center)
+    },
+    {
+      path: '/subVue',
+      element: SuspenseWrapper(SubVue)
+    },
+    {
+      path: '/subReact',
+      element: SuspenseWrapper(SubReact)
     },
     {
       path: '/',
