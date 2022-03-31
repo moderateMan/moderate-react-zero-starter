@@ -3,6 +3,9 @@ interface Window {
   GAME_FLAG: string
   g_microAppsStart: any
 }
+interface globalThis {
+  IS_REACT_ACT_ENVIRONMENT: boolean
+}
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test'

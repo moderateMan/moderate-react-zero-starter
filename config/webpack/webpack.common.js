@@ -1,11 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getStyleLoaders } = require('./utils')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const webpack = require('webpack')
-const { ESBuildMinifyPlugin, ESBuildPlugin } = require('esbuild-loader')
+const { ESBuildMinifyPlugin } = require('esbuild-loader')
 const { getClientEnvironment } = require('../env')
 const paths = require('../utils/paths')
 
@@ -20,7 +19,6 @@ const isSourceMap = process.env.GENERATE_SOURCEMAP === 'true'
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true'
 const disableESLintPlugin = process.env.ESLINT_DISABLE === 'true'
 const isEnvDevelopment = process.env.NODE_ENV === 'development'
-const shouldUseReactRefresh = process.env.shouldUseReactRefresh === 'true'
 
 const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1))
 module.exports = {
@@ -131,17 +129,6 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin(env.stringified),
-    new ESBuildPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    isEnvDevelopment &&
-      shouldUseReactRefresh &&
-      new ReactRefreshWebpackPlugin({
-        overlay: {
-          entry: paths.webpackDevClientEntry,
-          module: paths.reactRefreshOverlayEntry,
-          sockIntegration: false
-        }
-      }),
     new webpack.ProvidePlugin({
       React: 'react'
     }),

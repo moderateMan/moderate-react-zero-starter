@@ -27,6 +27,11 @@
   },
   "author": "",
   "license": "ISC",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.8",
@@ -35,10 +40,10 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.16.7",
     "@commitlint/config-conventional": "^16.2.1",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^13.0.0-alpha.6",
+    "@types/jest": "^27.4.1",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
@@ -78,14 +83,15 @@
     "lodash": "^4.17.21",
     "lodash.union": "^4.6.0",
     "mini-css-extract-plugin": "^2.6.0",
+    "msw": "^0.39.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.1",
     "process": "^0.11.10",
     "qiankun": "^2.7.0",
-    "react": "^17.0.2",
+    "react": "^18.0.0",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.0",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.0.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "recursive-readdir-sync": "^1.0.6",
@@ -102,14 +108,5 @@
     "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0",
     "webpackbar": "^5.0.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "msw": "^0.39.2"
   }
 }

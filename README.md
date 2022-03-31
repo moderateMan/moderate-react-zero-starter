@@ -763,3 +763,14 @@ minimizer: [
 
 安装 jest
 安装 jest
+
+---
+
+# react 18 单元测试失败
+
+安装`@testing-library/react@alpha`
+然后问题就解决了，如果想取消针对 concurrent 的调整，那就进行设置
+
+```js
+render(ui, { legacyRoot: true })
+```
