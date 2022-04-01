@@ -5,6 +5,7 @@ import { Button, Layout, Card, Form, Row } from 'antd'
 import { FormItem } from '@COMMON/components'
 import toConfig from './config'
 import { useNavigate } from 'react-router-dom'
+import Upload from './upload'
 
 interface PropsT {
   [key: string]: any
@@ -58,6 +59,7 @@ const Login: React.FC<PropsT> = () => {
           >
             注册
           </Button>
+          <Upload></Upload>
         </Row>
       </Card>
     </Layout>
