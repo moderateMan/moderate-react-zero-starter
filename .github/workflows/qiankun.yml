@@ -34,7 +34,7 @@ jobs:
       - name: deploy # 部署
         run: |
           ssh play@49.233.107.254 "
-            cd /home/play/projects/react-template-zero;
+            cd /home/play/projects/moderate-react-zero-starter;
             git pull;
             yarn installAll;
             yarn buildAll

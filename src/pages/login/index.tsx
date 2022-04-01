@@ -57,7 +57,7 @@ const Login: React.FC<PropsT> = () => {
               fetchRegister()
             }}
           >
-            注册1
+            注册
           </Button>
           <Upload></Upload>
         </Row>
