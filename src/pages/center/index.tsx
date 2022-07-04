@@ -3,6 +3,7 @@ import styles from './index.module.scss'
 import { Layout, Card, Button, Row, Input, Form } from 'antd'
 import { useAppSelector } from '@STORE/hooks'
 import { useDispatch } from 'react-redux'
+import useAsync from './useAsync'
 import {
   decrement,
   increment,
@@ -42,6 +43,14 @@ const Center: React.FC<PropsT> = () => {
   }
   const count = useAppSelector(selectCount)
   const dispatch = useDispatch()
+  useAsync(async () => {
+    const b = await new Promise(resolve => {
+      setTimeout(function () {
+        resolve('time')
+      }, 3000)
+    })
+    console.log(b)
+  }, [])
   const handleClick = (type: string, payload?: any) => {
     let action
     if (type === TYPES.decrement) {

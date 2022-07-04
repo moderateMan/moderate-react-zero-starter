@@ -33,36 +33,27 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   use: {
-      //     loader: require.resolve('esbuild-loader'),
-      //     options: {
-      //       loader: 'jsx',
-      //       target: 'es2015',
-      //       jsxFactory: 'React.createElement',
-      //       jsxFragment: 'React.Fragment'
-      //     }
-      //   },
-      //   exclude: [/node_modules/]
-      // },
-      // {
-      //   test: /\.(ts|tsx)$/,
-      //   use: {
-      //     loader: require.resolve('esbuild-loader'),
-      //     options: {
-      //       loader: 'jsx',
-      //       target: 'es2015',
-      //       jsxFactory: 'React.createElement',
-      //       jsxFragment: 'React.Fragment'
-      //     }
-      //   },
-      //   exclude: [/node_modules/]
-      // },
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.(js|jsx)$/,
         use: {
-          loader: require.resolve('babel-loader')
+          loader: require.resolve('esbuild-loader'),
+          options: {
+            loader: 'jsx',
+            target: 'es2015',
+            jsxFactory: 'React.createElement',
+            jsxFragment: 'React.Fragment'
+          }
+        },
+        exclude: [/node_modules/]
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        use: {
+          loader: require.resolve('esbuild-loader'),
+          options: {
+            loader: 'tsx', // Or 'ts' if you don't need tsx
+            target: 'es2015'
+          }
         },
         exclude: [/node_modules/]
       },

@@ -7,6 +7,7 @@ import { store } from './store'
 import { registerMicroApps, start } from 'qiankun'
 import apps from './apps'
 import './index.css'
+import 'antd/dist/antd.min.css'
 
 function render() {
   const root = createRoot(document.getElementById('root')!)
