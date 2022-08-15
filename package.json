@@ -1,7 +1,7 @@
 {
-  "name": "react-templae",
-  "version": "1.0.0",
-  "description": "",
+  "name": "moderate-admin",
+  "version": "0.0.1",
+  "description": "Moderate 管理后台模版项目",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -25,7 +25,7 @@
     "installQ:sub-vue": "cd subApps/sub-vue && yarn",
     "installQ:sub-react": "cd subApps/sub-react && yarn"
   },
-  "author": "",
+  "author": "闲D阿强",
   "license": "ISC",
   "config": {
     "commitizen": {
@@ -44,6 +44,7 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.0.0-alpha.6",
     "@types/jest": "^27.4.1",
+    "@types/jquery": "^3.5.14",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^5.16.0",

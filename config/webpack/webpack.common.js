@@ -171,4 +171,7 @@ module.exports = {
       })
     ]
   }
+  // externals: {
+  //   jquery: '$'
+  // }
 }

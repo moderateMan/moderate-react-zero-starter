@@ -2,6 +2,7 @@ interface Window {
   cc: any
   GAME_FLAG: string
   g_microAppsStart: any
+  $: any
 }
 interface globalThis {
   IS_REACT_ACT_ENVIRONMENT: boolean
