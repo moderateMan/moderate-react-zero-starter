@@ -1,7 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getStyleLoaders } = require('./utils')
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const webpack = require('webpack')
@@ -89,7 +87,6 @@ module.exports = {
           sourceMap: isSourceMap,
           modules: {
             mode: 'local',
-            getLocalIdent: getCSSModuleLocalIdent
           }
         }),
         sideEffects: true
@@ -117,7 +114,6 @@ module.exports = {
             sourceMap: isSourceMap,
             modules: {
               mode: 'local',
-              getLocalIdent: getCSSModuleLocalIdent
             }
           },
           'sass-loader'
@@ -134,14 +130,7 @@ module.exports = {
     new ESBuildPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     isEnvDevelopment &&
-      shouldUseReactRefresh &&
-      new ReactRefreshWebpackPlugin({
-        overlay: {
-          entry: paths.webpackDevClientEntry,
-          module: paths.reactRefreshOverlayEntry,
-          sockIntegration: false
-        }
-      }),
+    shouldUseReactRefresh &&
     new webpack.ProvidePlugin({
       React: 'react'
     }),
@@ -155,34 +144,34 @@ module.exports = {
         },
         !isEnvDevelopment
           ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true
-              }
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true
             }
+          }
           : undefined
       )
     ),
     !disableESLintPlugin &&
-      new ESLintPlugin({
-        // Plugin options
-        extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-        formatter: paths.eslintFormatter,
-        eslintPath: paths.eslintPath,
-        emitError: emitErrorsAsWarnings,
-        failOnError: emitErrorsAsWarnings,
-        context: paths.appSrc,
-        cache: true,
-        cacheLocation: paths.eslintPluginCache
-      })
+    new ESLintPlugin({
+      // Plugin options
+      extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+      formatter: paths.eslintFormatter,
+      eslintPath: paths.eslintPath,
+      emitError: emitErrorsAsWarnings,
+      failOnError: emitErrorsAsWarnings,
+      context: paths.appSrc,
+      cache: true,
+      cacheLocation: paths.eslintPluginCache
+    })
   ].filter(Boolean),
   optimization: {
     minimizer: [
