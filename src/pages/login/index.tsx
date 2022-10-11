@@ -17,6 +17,8 @@ const Login: React.FC<PropsT> = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false)
   useEffect(() => {
     setConfig(toConfig())
+    const event = new CustomEvent('test')
+    window.dispatchEvent(event)
   }, [])
   const fetchRegister = () => {
     requset
@@ -31,6 +33,13 @@ const Login: React.FC<PropsT> = () => {
         setIsLogin(false)
       })
   }
+
+  window.addEventListener('test', () => {
+    // console.log(123)
+  })
+  window.addEventListener('test', () => {
+    // console.log(456)
+  })
   return (
     <Layout className={styles.layout}>
       <Card className={styles.login_table}>

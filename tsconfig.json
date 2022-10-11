@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "noImplicitThis": false,
-    "experimentalDecorators":true,
+    "experimentalDecorators": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,20 +18,17 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
-    "downlevelIteration":true,
+    "downlevelIteration": true,
     "importHelpers": true,
     "paths": {
       "@DATA_MANAGER/*": ["src/dataManager/*"],
       "@STORE/*": ["src/store/*"],
-      "@COMMON/*":["src/common/*"],
-      "@ROUTES/*":["src/routes/*"],
-      "@SRC/*":["src/*"],
-      "@API/*":["src/dataManager/netTrans/api/*"]
+      "@COMMON/*": ["src/common/*"],
+      "@ROUTES/*": ["src/routes/*"],
+      "@SRC/*": ["src/*"],
+      "@API/*": ["src/dataManager/netTrans/api/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": [
-    "src"
-  ],
- 
+  "include": ["src"]
 }

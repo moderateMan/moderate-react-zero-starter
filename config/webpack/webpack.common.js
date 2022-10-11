@@ -7,6 +7,7 @@ const webpack = require('webpack')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
 const { getClientEnvironment } = require('../env')
 const paths = require('../utils/paths')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 // style files regexes
 const cssRegex = /\.(css|less)$/
@@ -17,7 +18,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/
 // flags
 const isSourceMap = process.env.GENERATE_SOURCEMAP === 'true'
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true'
-const disableESLintPlugin = process.env.ESLINT_DISABLE === 'true'
+const disableESLintPlugin = true
 const isEnvDevelopment = process.env.NODE_ENV === 'development'
 
 const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1))
@@ -119,6 +120,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new webpack.DefinePlugin(env.stringified),
     new webpack.ProvidePlugin({
       React: 'react'
@@ -133,34 +135,34 @@ module.exports = {
         },
         !isEnvDevelopment
           ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true
-              }
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true
             }
+          }
           : undefined
       )
     ),
     !disableESLintPlugin &&
-      new ESLintPlugin({
-        // Plugin options
-        extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-        formatter: paths.eslintFormatter,
-        eslintPath: paths.eslintPath,
-        emitError: emitErrorsAsWarnings,
-        failOnError: emitErrorsAsWarnings,
-        context: paths.appSrc,
-        cache: true,
-        cacheLocation: paths.eslintPluginCache
-      })
+    new ESLintPlugin({
+      // Plugin options
+      extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+      formatter: paths.eslintFormatter,
+      eslintPath: paths.eslintPath,
+      emitError: emitErrorsAsWarnings,
+      failOnError: emitErrorsAsWarnings,
+      context: paths.appSrc,
+      cache: true,
+      cacheLocation: paths.eslintPluginCache
+    })
   ].filter(Boolean),
   optimization: {
     minimizer: [

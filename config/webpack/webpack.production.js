@@ -75,9 +75,9 @@ module.exports = {
         minRatio: 0.8
       }),
       !process.env.BUNDLE_NO_ANALZER &&
-        new BundleAnalyzerPlugin({
-          openAnalyzer: false
-        })
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false
+      })
     ].filter(Boolean)
   }
 }

@@ -23,7 +23,8 @@
     "buildQ:sub-vue": "cd subApps/sub-vue && npm run build && mkdir -p ../../build/subapp/sub-vue && cp -r ./dist/* ../../build/subapp/sub-vue/",
     "installAll": "yarn && npm-run-all --serial installQ:*",
     "installQ:sub-vue": "cd subApps/sub-vue && yarn",
-    "installQ:sub-react": "cd subApps/sub-react && yarn"
+    "installQ:sub-react": "cd subApps/sub-react && yarn",
+    "prepare": "husky install"
   },
   "author": "闲D阿强",
   "license": "ISC",
@@ -50,6 +51,7 @@
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "antd": "^4.19.3",
+    "antd-dayjs-webpack-plugin": "^1.0.6",
     "axios": "^0.26.1",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
@@ -71,6 +73,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^10.0.1",
     "html-webpack-plugin": "^5.5.0",
@@ -109,5 +112,8 @@
     "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0",
     "webpackbar": "^5.0.2"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0"
   }
 }

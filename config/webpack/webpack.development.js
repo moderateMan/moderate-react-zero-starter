@@ -1,4 +1,5 @@
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const proxyConfig = require('../proxy')
 const paths = require('../utils/paths')
 
@@ -21,6 +22,7 @@ module.exports = {
     minimize: false
   },
   plugins: [
+    new AntdDayjsWebpackPlugin(),
     new FriendlyErrorsWebpackPlugin({
       // 成功的时候输出
       compilationSuccessInfo: {
